@@ -1,0 +1,20 @@
+{
+  "name": "store-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^7.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
