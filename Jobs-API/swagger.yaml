@@ -1,0 +1,253 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://jobs-api-fcqg.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register user
+      operationId: Register user
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisteruserRequest"
+                - example:
+                    name: ""
+                    email: ""
+                    password: ""
+            example:
+              name: ""
+              email: ""
+              password: ""
+        required: true
+      responses:
+        "201":
+          description: "User created"
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login user
+      operationId: Login user
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginuserRequest"
+                - example:
+                    email: ""
+                    password: ""
+            example:
+              email: ""
+              password: ""
+        required: true
+      responses:
+        "200":
+          description: "Login successful"
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: Create job
+      operationId: Create job
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreatejobRequest"
+                - example:
+                    company: ""
+                    position: ""
+            example:
+              company: ""
+              position: ""
+        required: true
+      responses:
+        "201":
+          description: "Job is created"
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Jobs
+      summary: Get All jobs
+      operationId: Get All jobs
+      parameters: []
+      responses:
+        "200":
+          description: "All jobs data are obtained"
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/{id}:
+    get:
+      tags:
+        - Jobs
+      summary: Get single job
+      operationId: Get single job
+      parameters:
+        - name: id
+          in: path
+          description: "The job ID"
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Single job data is obtained"
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Jobs
+      summary: Update Job
+      operationId: Update Job
+      parameters:
+        - name: id
+          in: path
+          description: ""
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdatejobRequest"
+                - example:
+                    company: ""
+                    position: ""
+            example:
+              company: ""
+              position: ""
+        required: true
+      responses:
+        "200":
+          description: "Job with particular job ID is updated"
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Jobs
+      summary: Delete job
+      operationId: Delete job
+      parameters:
+        - name: id
+          in: path
+          description: ""
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Job with particular job ID is deleted"
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    RegisteruserRequest:
+      title: Register user Request
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: ""
+        email: ""
+        password: ""
+    LoginuserRequest:
+      title: Login user Request
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: ""
+        password: ""
+    CreatejobRequest:
+      title: Create job Request
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: ""
+        position: ""
+    UpdatejobRequest:
+      title: Update Job Request
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: ""
+        position: ""
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ""
+  - name: Jobs
+    description: ""
